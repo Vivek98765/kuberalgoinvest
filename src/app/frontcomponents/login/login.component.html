@@ -1,0 +1,116 @@
+<div class="signup-wrap">
+  <header>
+    <div class="container">
+        <div class="header-part">
+            <div class="logo">
+                <a href="#">
+                     <img src="assets/images/logo.png" alt=""> 
+                </a>
+            </div>
+            <div class="login-button">
+                <ul>
+                    <li>
+                        <a [routerLink]="'/'" class="btn btn-primary">Login</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="'/signup'" class="btn btn-outline-warning">Signup</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+     <section>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="signup-left">
+                <h2>Sign in to Invest</h2>
+                <p>
+                    Converge Money peer to peer lending offers investors the opportunity to<br>
+                    earn attractive returns by directly investing in strong, creditworthy<br>
+                    business via our online platform.
+                </p>
+                <div class="sighup-img">
+                  <img src="assets/images/main-bg.jpg" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="signup-right">
+                <div class="progress-percent">
+                  <img src="assets/images/progress.png" alt="" width="97">
+                </div>
+                <div class="form-heading">
+                    <h3 class="main-heading">Sign in</h3>
+                    <p>"Nice to meet you"</p>
+                </div>
+                 <form  class="row g-3" [formGroup]="modelform" (ngSubmit)="login()">
+                  <div class="col-md-12">
+                      <label class="form-label">User name</label>
+                      <input type="text" class="form-control {{f.username.errors ? 'is-invalid' : 'is-valid'}}" formControlName="username" placeholder="First User Name">
+                      <div *ngIf=" f.username.errors" class="invalid-feedback">
+                          <div *ngIf="f.username.errors.required">Oops, Only English Alphabets please.</div>
+                      </div> 
+                  </div>
+                  <div class="col-md-12 relative" (focusin)="show = true" (focusout)="show = false">
+                      <label class="form-label">Password</label>
+                      <input type="password" class="form-control {{f.password.errors ? 'is-invalid' : 'is-valid'}}" formControlName="password" placeholder="Create a password">
+                      <ul *ngIf="f.password.errors && show" class="hint-list">
+                        
+                          <li>A Symbol @,#,%,$,!<li>
+                          <li>A capital letter</li>
+                          <li>A small letter</li>
+                          <li>Minimum 6 Character</li>
+                          <li>Minimum one digit between 0-9</li>
+                      </ul>
+                      <ul *ngIf="!f.password.errors && show" class="hint-list success">
+                          <li>A Symbol @,#,%,$,!<li>
+                          <li>A capital letter</li>
+                          <li>A small letter</li>
+                          <li>Minimum 6 Character</li>
+                          <li>Minimum one digit between 0-9</li>
+                      </ul>
+                  </div>
+                 <!-- <div class="col-md-12 mt-4">
+                    <label class="form-label">Signing up as a</label>
+                    <div class="form-check form-check-inline ms-3">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                      <label class="form-check-label" for="inlineRadio1">Investor</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked>
+                      <label class="form-check-label" for="inlineRadio2">Business</label>
+                    </div>
+                  </div>
+                   <div class="col-md-12 mt-4">
+                    <label class="form-label">Referral Code <span>(optional)</span></label>
+                    <input type="text" class="form-control" placeholder="Enter referral Code">
+                  </div> -->
+                  <div class="col-lg-12 text-center mt-4">
+                    <button class="btn btn-primary" [disabled]="!modelform.valid" type="submit">Login</button>
+                  </div>
+                  <div class="col-lg-12 text-center">
+                    <p class="text-purple">
+                        By clicking on Start Converging you agree to our
+                        <a href="#"><strong>Tersm of General Use</strong></a> and <a href="#"><strong>Privacy Policy</strong></a>
+                    </p>
+                    <p class="text-purple">
+                        Don't have an account? <a [routerLink]="'/signup'"><strong>Register</strong></a>
+                    </p>
+                    <!-- <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                      <label class="form-check-label" for="invalidCheck">
+                        Agree to terms and conditions
+                      </label>
+                    </div> -->
+                  </div>
+                  
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> 
+    
+  </div>

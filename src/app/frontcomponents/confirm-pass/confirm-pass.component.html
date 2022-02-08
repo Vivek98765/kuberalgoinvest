@@ -1,0 +1,67 @@
+<div class="signup-wrap">
+    <header>
+      <div class="container">
+        <div class="logo">
+          <a href="#">
+              <img src="assets/images/logo.png" alt="">
+          </a>
+        </div>
+      </div>
+    </header>
+     <section>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="signup-left">
+                <h2>Sign in to Invest</h2>
+                <p>
+                    Converge Money peer to peer lending offers investors the opportunity to<br>
+                    earn attractive returns by directly investing in strong, creditworthy<br>
+                    business via our online platform.
+                </p>
+                <div class="sighup-img">
+                  <img src="assets/images/main-bg.jpg" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="signup-right">
+                <div class="progress-percent">
+                  <img src="assets/images/progress.png" alt="" width="97">
+                </div>
+                <div class="form-heading">
+                    <h3 class="main-heading">Sign in</h3>
+                    <p>"Nice to meet you"</p>
+                </div>
+                 <form  class="row g-3" [formGroup]="modelform" (ngSubmit)="changePass()">
+                  <div class="col-md-12">
+                      <label class="form-label">Password</label>
+                      <input type="text" class="form-control is-invalid" formControlName="password" placeholder="Enter Password">
+                      <div class="invalid-feedback">
+                          Oops, Only English Alphabets please.
+                      </div>
+                  </div>
+                  <div class="col-md-12">
+                    <label class="form-label">Confirm Password</label>
+                    <input type="text" class="form-control is-invalid" formControlName="confPass" placeholder="Enter Confirm Password">
+                    <div class="invalid-feedback">
+                        Oops, Only English Alphabets please.
+                    </div>
+                </div>
+                  <div class="col-lg-12 text-center mt-4">
+                    <button class="btn btn-primary" type="submit">Forgot</button>
+                  </div>
+                  <div class="col-lg-12 text-center">
+                    <p class="text-purple">
+                        Don't have an account? <a [routerLink]="'/signup'"><strong>Register</strong></a>
+                    </p>
+                  </div>
+                  
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> 
+    
+  </div>

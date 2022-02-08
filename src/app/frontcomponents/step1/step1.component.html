@@ -1,0 +1,138 @@
+
+<div class="setup-step-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="main-heading">Setup your business account</h2>
+            </div>
+            <div class="col-md-12">
+                <div class="setup-step">
+                    <ul>
+                        <li class="active">
+                            <span>1</span> Your Details
+                        </li>
+                        <li>
+                            <span>2</span> Company Details
+                        </li>
+                        <li>
+                            <span>3</span> Details of Business Owners
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <form [formGroup]="modelform" (ngSubmit)="step1()">
+                <div class="step-form">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-control {{f.username.errors ? 'is-invalid' : 'is-valid'}}" formControlName="username" [(ngModel)]="formdetails.username">
+                            <div *ngIf="f.username.errors" class="invalid-feedback">
+                                <div *ngIf="f.username.errors.required">Please Enter First Name.</div>
+                            </div> 
+                            <div class="invalid-feedback" *ngIf="f.username.errors?.pattern">
+                                Enter Characters only.
+                              </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Middle Name</label>
+                            <input type="text" class="form-control" formControlName="middlename" [(ngModel)]="formdetails.middlename">
+                            <div class="invalid-feedback" *ngIf="f.middlename.errors?.pattern">
+                                Enter Characters only.
+                              </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-control" formControlName="lastname" [(ngModel)]="formdetails.lastname">
+                            <div class="invalid-feedback" *ngIf="f.lastname.errors?.pattern">
+                                Enter Characters only.
+                              </div>
+                        </div> 
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Designation</label>
+                            <input type="text" class="form-control {{f.designation.errors ? 'is-invalid' : 'is-valid'}}" formControlName="designation" [(ngModel)]="formdetails.designation">
+                            <div *ngIf=" f.designation.errors" class="invalid-feedback">
+                                <div *ngIf="f.designation.errors.required">Please Enter Designation.</div>
+                            </div>
+                            <div class="invalid-feedback" *ngIf="f.designation.errors?.pattern">
+                                Enter Characters only.
+                              </div> 
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Official Email</label>
+                            <input type="email" class="form-control" formControlName="email" [(ngModel)]="formdetails.email" readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Contact Number (Landline)</label>
+                            <input type="tel" class="form-control {{f.contact_land.errors ? 'is-invalid' : 'is-valid'}}" formControlName="contact_land" [(ngModel)]="formdetails.contact_land">
+                            <div *ngIf="f.contact_land.errors" class="invalid-feedback">
+                                <div *ngIf="f.contact_land.errors.required">Please Enter Contact Number (Landline).</div>
+                            </div>   
+                            <div class="invalid-feedback" *ngIf="f.contact_land.errors?.pattern">
+                                Enter Numbers only.
+                              </div> 
+                              <div class="invalid-feedback" *ngIf="f.contact_land.errors?.minlength && f.contact_land.errors?.maxlength">
+                                Enter Minimum 10 digit.
+                              </div>                      
+                        </div>
+                        <div class="col-md-2 mb-3 mt-4-5 text-right">
+                            <select class="form-select {{f.countryCodeMob.errors ? 'is-invalid' : 'is-valid'}}" formControlName="countryCodeMob" [(ngModel)]="formdetails.countryCodeMob">
+                                <option selected value="91">+91</option>
+                                <option value="354">+354</option>
+                                <option value="62">+62</option>
+                                <option value="971">+971</option>
+                            </select>
+                            <div *ngIf=" f.countryCodeMob.errors" class="invalid-feedback">
+                                <div *ngIf="f.countryCodeMob.errors.required">Please Enter Country Code.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Contact Number (Mobile)</label>
+                            <input type="tel" class="form-control {{f.contact_mob.errors ? 'is-invalid' : 'is-valid'}}" formControlName="contact_mob" [(ngModel)]="formdetails.contact_mob">
+                            <div *ngIf=" f.contact_mob.errors" class="invalid-feedback">
+                                <div *ngIf="f.contact_mob.errors.required">Please Enter Contact Number (Mobile).</div>
+                            </div>
+                            <div class="invalid-feedback" *ngIf="f.contact_mob.errors?.pattern">
+                                Enter Numbers only.
+                              </div> 
+                              <div class="invalid-feedback" *ngIf="f.contact_mob.errors?.minlength">
+                                Enter Minimum 10 digit.
+                              </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Photo of your Business Card</label>
+                            <input type="file" class="form-control" formControlName="business_card" (change)="onFileChange($event)">
+                            <!-- <div *ngIf=" f.business_card.errors" class="invalid-feedback">
+                                <div *ngIf="f.business_card.errors.required">Please Attach.</div>
+                            </div> -->
+                            <div class="preview mt-3" *ngIf="preview && preview !== null">
+                                <img [src]="preview" alt="image" height="150">
+                              </div> 
+                               <div class="preview mt-3" *ngIf="preview == null">
+                              <img [src]="preview" alt="image" height="150">
+                          </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="agree" [(ngModel)]="formdetails.agree">
+                                <label class="form-check-label text-primary" for="flexCheckDefault">
+                                    I agree that I'm eligible and have been designated to complete this application.
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" formControlName="recieve_sms" [(ngModel)]="formdetails.recieve_sms">
+                                <label class="form-check-label text-primary" for="flexCheckChecked">
+                                    I would like to receive SMSs and email communications from iFund about updates, promotions or special offers.
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="text-end mb-3">
+                        <button type="submit" [disabled]="!modelform.valid" class="btn btn-warning mt-4">Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,240 @@
+<div class="setup-step-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="main-heading">Setup your business account</h2>
+            </div>
+            <div class="col-md-12">
+                <div class="setup-step">
+                    <ul>
+                        <li class="past">
+                            <span><i class="fa fa-check"></i></span> Your Details
+                        </li>
+                        <li class="past">
+                            <span><i class="fa fa-check"></i></span> Company Details
+                        </li>
+                        <li class="active">
+                            <span>3</span> Details of Business Owners
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <form [formGroup]="modelform" (ngSubmit)="step3()">
+                    <div *ngFor="let add_compDetails of t.controls; let i = index">
+                        <h5 class="text-primary mt-4">Additional Comapny Details</h5>
+                        <button (click)="delete_compDetails(i+1, add_compDetails)" *ngIf="i > 0" class="btn btn-danger mt-4"><i class="fa fa-trash"></i></button>
+                        <div class="step-form mt-3" [formGroup]="add_compDetails">
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">First Name</label>
+                                    <input type="text" class="form-control {{t.controls[i].get('busifirstname').errors ? 'is-invalid' : 'is-valid'}}" formControlName="busifirstname" >
+                                    <div *ngIf="t.controls[i].get('busifirstname').errors" class="invalid-feedback">
+                                        <div>Please Enter Valid First Name.</div>
+                                    </div> 
+                                    <div class="invalid-feedback" *ngIf="t.controls[i].get('busifirstname').errors?.pattern">
+                                        Enter Characters only.
+                                      </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Middle Name</label>
+                                    <input type="text" class="form-control {{t.controls[i].get('busimiddleName').errors ? 'is-invalid' : ''}}" formControlName="busimiddleName">
+                                    <div class="invalid-feedback" *ngIf="t.controls[i].get('busimiddleName').errors?.pattern">
+                                        Enter Characters only.
+                                      </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" class="form-control {{t.controls[i].get('busilastName').errors ? 'is-invalid' : ''}}" formControlName="busilastName">
+                                    <div class="invalid-feedback" *ngIf="t.controls[i].get('busilastName').errors?.pattern">
+                                        Enter Characters only.
+                                      </div>
+                                </div>
+                                <div class="col-md-2 mb-3 mt-4-5">
+                                    <select class="form-select {{t.controls[i].get('busiCcode').errors ? 'is-invalid' : 'is-valid'}}" formControlName="busiCcode">
+                                        <option selected>+213</option>
+                                        <option value="1">+354</option>
+                                        <option value="2">+62</option>
+                                        <option value="3">+91</option>
+                                    </select>
+                                    <div *ngIf="t.controls[i].get('busiCcode').errors" class="invalid-feedback">
+                                        <div>Please Enter Coutry Code.</div>
+                                    </div> 
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Mobile Number</label>
+                                    <input type="tel" class="form-control {{t.controls[i].get('busimobile').errors ? 'is-invalid' : 'is-valid'}}" formControlName="busimobile">
+                                    <div *ngIf="t.controls[i].get('busimobile').errors" class="invalid-feedback">
+                                        <div>Please Enter Mobile Number.</div>
+                                    </div>
+                                    <div class="invalid-feedback" *ngIf="t.controls[i].get('busimobile').errors?.pattern">
+                                        Enter valid Mobile Number.
+                                      </div> 
+                                      <div class="invalid-feedback" *ngIf="t.controls[i].get('busimobile').errors?.minlength || t.controls[i].get('busimobile').errors?.minlength">
+                                        Enter valid Digits only.
+                                      </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Email Id</label>
+                                    <input type="email" class="form-control {{t.controls[i].get('busiemail').errors ? 'is-invalid' : 'is-valid'}}" formControlName="busiemail">
+                                    <div *ngIf="t.controls[i].get('busiemail').errors" class="invalid-feedback">
+                                        <div>Please Enter Email Id.</div>
+                                    </div> 
+                                    <div class="invalid-feedback" *ngIf="t.controls[i].get('busiemail').errors?.pattern">
+                                        Enter valid Email Id.
+                                      </div> 
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Ownership Type</label>
+                                    <select class="form-select {{t.controls[i].get('Ownership').errors ? 'is-invalid' : 'is-valid'}}" formControlName="Ownership">
+                                        <option selected>Select</option>
+                                        <option value="Sponsor">Sponsor</option>
+                                        <option value="Agent">Agent</option>
+                                        <option value="Partner">Partner</option>
+                                        <option value="Investor">Investor</option>
+                                    </select>
+                                    <div *ngIf="t.controls[i].get('Ownership').errors" class="invalid-feedback">
+                                        <div>Please Enter Ownership Type.</div>
+                                    </div> 
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">% Share Holding in the company</label>
+                                    <input type="text" class="form-control {{t.controls[i].get('shareholding').errors ? 'is-invalid' : 'is-valid'}}" formControlName="shareholding">
+                                    <div *ngIf="t.controls[i].get('shareholding').errors" class="invalid-feedback">
+                                        <div>Please Enter % Share Holding.</div>
+                                    </div> 
+                                    <div class="invalid-feedback" *ngIf="t.controls[i].get('shareholding').errors?.pattern">
+                                        Enter Numeric.
+                                      </div> 
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Date of Birth</label>
+                                    <input type="date" class="form-control {{t.controls[i].get('busidob').errors ? 'is-invalid' : 'is-valid'}}" formControlName="busidob">
+                                    <div *ngIf="t.controls[i].get('busidob').errors" class="invalid-feedback">
+                                        <div>Please Enter Date of Birth.</div>
+                                    </div> 
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Nationality</label>
+                                    <select class="form-select {{t.controls[i].get('nationality').errors ? 'is-invalid' : 'is-valid'}}" formControlName="nationality">
+                                        <option selected>Dubai</option>
+                                        <option value="1">India</option>
+                                        <option value="2">Albania</option>
+                                        <option value="3">Andorra</option>
+                                    </select>
+                                    <div *ngIf="t.controls[i].get('nationality').errors" class="invalid-feedback">
+                                        <div>Please Enter Nationality.</div>
+                                    </div> 
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Passport Number</label>
+                                    <input type="text" class="form-control {{t.controls[i].get('passNo').errors ? 'is-invalid' : 'is-valid'}}" formControlName="passNo">
+                                    <div *ngIf="t.controls[i].get('passNo').errors" class="invalid-feedback">
+                                        <div>Please Enter Passport Number.</div>
+                                    </div> 
+                                    <div class="invalid-feedback" *ngIf="t.controls[i].get('passNo').errors?.pattern">
+                                        Enter Numeric.
+                                      </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Date of Issue</label>
+                                    <input type="date" class="form-control {{t.controls[i].get('dateIssue').errors ? 'is-invalid' : 'is-valid'}}" formControlName="dateIssue">
+                                    <div *ngIf="t.controls[i].get('dateIssue').errors" class="invalid-feedback">
+                                        <div>Please Enter Date of Issue.</div>
+                                    </div> 
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Date of Expiry</label>
+                                    <input type="date" class="form-control {{t.controls[i].get('expDate').errors ? 'is-invalid' : 'is-valid'}}" [min]="t.controls[i].get('dateIssue').value" formControlName="expDate">
+                                    <div *ngIf="t.controls[i].get('expDate').errors" class="invalid-feedback">
+                                        <div>Please Enter Date of Expiry.</div>
+                                    </div> 
+                                </div>
+                                </div>
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck{{i}}" formControlName="resident">
+                                        <label class="form-check-label" for="defaultCheck{{i}}">
+                                            Are you a UAE Resident? (Yes/No)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="t.controls[i].get('resident').value">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Emirates ID Number</label>
+                                    <input type="text" class="form-control {{t.controls[i].get('emiratesId').errors ? 'is-invalid' : ''}}" formControlName="emiratesId">
+                                    <!-- <div *ngIf="t.controls[i].get('emiratesId').errors" class="invalid-feedback">
+                                        <div>Please Enter Emirates ID Number.</div>
+                                    </div>  -->
+                                    <div class="invalid-feedback" *ngIf="t.controls[i].get('emiratesId').errors?.pattern">
+                                        Enter Numeric.
+                                      </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Date of Issue</label>
+                                    <input type="date" class="form-control" formControlName="uaeissuedate">
+                                    <!-- <div *ngIf="t.controls[i].get('uaeissuedate').errors" class="invalid-feedback">
+                                        <div>Please Enter Date of Issue.</div>
+                                    </div>  -->
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Date of Expiry</label>
+                                    <input type="date" class="form-control" formControlName="uaeexpdate" [min]="t.controls[i].get('uaeissuedate').value">
+                                    <!-- <div *ngIf="t.controls[i].get('uaeexpdate').errors" class="invalid-feedback">
+                                        <div>Please Enter Date of Expiry.</div>
+                                    </div>  -->
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Attach Passport</label>
+                                    <input type="file" class="form-control" id="file{{i}}" (change)="fileup($event, i)">
+                                    <!-- <div *ngIf=" f.attachpass.errors" class="invalid-feedback">
+                                        <div>Please Attach Passport.</div>
+                                    </div>  -->
+                                    <div class="mt-3" *ngIf="attachPassPrev[i] && attachPassPrev[i] != null">
+                                          <img [src]="attachPassPrev[i]" alt="image" width="250"> 
+                                      </div> 
+
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Attach Emirates ID</label>
+                                    <input type="file" class="form-control" id="file2{{i}}" (change)="attachemid($event, i)">
+                                    <!-- <div *ngIf="t.controls[i].get('emid').errors" class="invalid-feedback">
+                                        <div>Please Enter Company Name.</div>
+                                    </div>  -->
+                                    <div class="mt-3" *ngIf="attachEmidPrev[i] && attachEmidPrev[i] != null">
+                                        <img [src]="attachEmidPrev[i]" alt="image" width="250"> 
+                                    </div> 
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Recent Utility Bill</label>
+                                    <input type="text" class="form-control {{t.controls[i].get('recentbill').errors ? 'is-invalid' : ''}}" formControlName="recentbill">
+                                    <!-- <div *ngIf="t.controls[i].get('recentbill').errors" class="invalid-feedback">
+                                        <div>Please Enter Company Name.</div>
+                                    </div>  -->
+                                    <div class="invalid-feedback" *ngIf="t.controls[i].get('recentbill').errors?.pattern">
+                                        Enter Numeric.
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12 text-right">
+                            <a href="javascript:void(0)" (click)="add_compDet()" class="btn btn-success mt-4">+ Add More</a>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <a [routerLink]="'/user/step2'" class="btn btn-outline-warning mt-4">Back</a>
+                        </div>
+                        <div class="col-6 text-end">
+                            <button type="submit" class="btn btn-warning mt-4">Continue</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

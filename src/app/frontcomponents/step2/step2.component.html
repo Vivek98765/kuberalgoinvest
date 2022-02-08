@@ -1,0 +1,281 @@
+
+<div class="setup-step-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="main-heading">Setup your business account</h2>
+            </div>
+            <div class="col-md-12">
+                <div class="setup-step">
+                    <ul>
+                        <li class="past">
+                            <span><i class="fa fa-check"></i></span> Your Details
+                        </li>
+                        <li class="active">
+                            <span>2</span> Company Details
+                        </li>
+                        <li>
+                            <span>3</span> Details of Business Owners
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <form [formGroup]="modelform" (ngSubmit)="step2()">
+                    <div class="step-form">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Company Name</label>
+                                <input type="text" class="form-control {{f.comp_name.errors ? 'is-invalid' : 'is-valid'}}" formControlName="comp_name" [(ngModel)]="formdetails.comp_name">
+                                <div *ngIf=" f.comp_name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.comp_name.errors.required">Please Enter Company Name.</div>
+                                </div> 
+                                <div class="invalid-feedback" *ngIf="f.comp_name.errors?.pattern">
+                                    Enter Characters only.
+                                  </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Trade License Number</label>
+                                <input type="text" class="form-control {{f.trade_liscense.errors ? 'is-invalid' : 'is-valid'}}" formControlName="trade_liscense" [(ngModel)]="formdetails.trade_liscense">
+                                <div *ngIf=" f.trade_liscense.errors" class="invalid-feedback">
+                                    <div *ngIf="f.trade_liscense.errors.required">Please Enter Trade License Number.</div>
+                                </div>
+                                <div class="invalid-feedback" *ngIf="f.trade_liscense.errors?.minlength">
+                                    Enter valid Trade License Number.
+                                  </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Trade License Issued</label>
+                                <select class="form-control {{f.liscense_issued.errors ? 'is-invalid' : 'is-valid'}}" formControlName="liscense_issued" [(ngModel)]="formdetails.liscense_issued">
+                                    <option selected>Dubai</option>
+                                    <option value="1">India</option>
+                                    <option value="2">Albania</option>
+                                    <option value="3">Andorra</option>
+                                </select>
+                                <div *ngIf=" f.liscense_issued.errors" class="invalid-feedback">
+                                    <div *ngIf="f.liscense_issued.errors.required">Please Enter Trade License Issued.</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Date of Incorporation</label>
+                                <input type="date" class="form-control {{f.date_incorp.errors ? 'is-invalid' : 'is-valid'}}" formControlName="date_incorp" [(ngModel)]="formdetails.date_incorp">
+                                <div *ngIf=" f.date_incorp.errors" class="invalid-feedback">
+                                    <div *ngIf="f.date_incorp.errors.required">Please Enter Date of Incorporation.</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Trade Expiry</label>
+                                <input type="date" class="form-control {{f.trade_expiry.errors ? 'is-invalid' : 'is-valid'}}" [min]="formdetails.date_incorp" formControlName="trade_expiry" [(ngModel)]="formdetails.trade_expiry">
+                                <div *ngIf=" f.trade_expiry.errors" class="invalid-feedback">
+                                    <div *ngIf="f.trade_expiry.errors.required">Please Enter Trade Expiry.</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Attach Trade License</label>
+                                <input type="file" class="form-control" formControlName="attach_liscense" (change)="onAttachLisc($event)">
+                                <!-- <div *ngIf=" f.attach_liscense.errors" class="invalid-feedback">
+                                    <div *ngIf="f.attach_liscense.errors.required">Please Enter Attach Trade License.</div>
+                                </div> -->
+                                <div class="lisc_preview mt-3" *ngIf="lisc_preview && lisc_preview !== null">
+                                    <img [src]="lisc_preview" alt="image" height="150">
+                                  </div> 
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Last MOA Date </label>
+                                <input type="date" class="form-control {{f.last_moa.errors ? 'is-invalid' : 'is-valid'}}" formControlName="last_moa" [(ngModel)]="formdetails.last_moa">
+                                <div *ngIf=" f.last_moa.errors" class="invalid-feedback">
+                                    <div *ngIf="f.last_moa.errors.required">Please Enter Last MOA Date.</div>
+                                </div>
+                            
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Attach All MOA</label>
+                                <input type="file" class="form-control" multiple formControlName="attach_allmoa" (change)="onAttachAllmoa($event)">
+                                <!-- <div *ngIf=" f.attach_allmoa.errors" class="invalid-feedback">
+                                    <div *ngIf="f.attach_allmoa.errors.required">Please Attach.</div>
+                                </div> -->
+                                <div class="allmoa_prv mt-3" *ngIf="allmoa_prv && allmoa_prv !== null && allmoa_prv.length > 0">
+                                    <span *ngIf="allmoa_prv_images !== null">
+                                        <img *ngFor="let url of allmoa_prv_images" [src]="url" height="75" class="p-2">
+                                    </span>
+                                <img *ngFor="let image of allmoa_prv; let i = index" class="p-2" [src]="ROOT_URL + replaceImgSrc(image.path)" alt="image" height="75"> 
+                                    
+                                </div>
+                                    
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <input type="text" class="form-control" formControlName="uae" placeholder="United Arab Emirates" readonly>
+        
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Emirates</label>
+                                <input type="text" class="form-control {{f.emirates.errors ? 'is-invalid' : 'is-valid'}}" formControlName="emirates" [(ngModel)]="formdetails.emirates">
+                                <div *ngIf=" f.emirates.errors" class="invalid-feedback">
+                                    <div *ngIf="f.emirates.errors.required">Please Enter Emirates.</div>
+                                </div>
+                                <div class="invalid-feedback" *ngIf="f.emirates.errors?.pattern">
+                                    Enter Characters only.
+                                  </div>
+                                  <div class="invalid-feedback" *ngIf="f.emirates.errors?.minlength">
+                                    Enter valid Emirates.
+                                  </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Company Address</label>
+                                <textarea class="form-control {{f.comp_address.errors ? 'is-invalid' : 'is-valid'}}" rows="3" formControlName="comp_address" [(ngModel)]="formdetails.comp_address"></textarea>
+                                <div *ngIf=" f.comp_address.errors" class="invalid-feedback">
+                                    <div *ngIf="f.comp_address.errors.required">Please Enter .</div>
+                                </div>
+                                <div class="invalid-feedback" *ngIf="f.comp_address.errors?.minlength">
+                                    Enter valid Company Address.
+                                  </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Area</label>
+                                <input type="text" class="form-control {{f.area.errors ? 'is-invalid' : 'is-valid'}}" formControlName="area" [(ngModel)]="formdetails.area">
+                                <div *ngIf=" f.area.errors" class="invalid-feedback">
+                                    <div *ngIf="f.area.errors.required">Please Enter .</div>
+                                </div>
+                                <div class="invalid-feedback" *ngIf="f.area.errors?.minlength">
+                                    Enter valid Area.
+                                  </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Street Name</label>
+                                <input type="text" class="form-control {{f.street.errors ? 'is-invalid' : 'is-valid'}}" formControlName="street" [(ngModel)]="formdetails.street">
+                                <div *ngIf=" f.street.errors" class="invalid-feedback">
+                                    <div *ngIf="f.street.errors.required">Please Enter .</div>
+                                </div>
+                                <div class="invalid-feedback" *ngIf="f.street.errors?.minlength">
+                                    Enter valid Street Name.
+                                  </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Building Name</label>
+                                <input type="text" class="form-control {{f.building_name.errors ? 'is-invalid' : 'is-valid'}}" formControlName="building_name" [(ngModel)]="formdetails.building_name">
+                                <div *ngIf=" f.building_name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.building_name.errors.required">Please Enter .</div>
+                                </div>
+                                <div class="invalid-feedback" *ngIf="f.building_name.errors?.minlength">
+                                    Enter valid Building Name.
+                                  </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Floor</label>
+                                <input type="text" class="form-control {{f.floor.errors ? 'is-invalid' : 'is-valid'}}" formControlName="floor" [(ngModel)]="formdetails.floor">
+                                <div *ngIf=" f.floor.errors" class="invalid-feedback">
+                                    <div *ngIf="f.floor.errors.required">Please Enter .</div>
+                                </div>
+                                <div class="invalid-feedback" *ngIf="f.floor.errors?.pattern">
+                                    Floor should be numeric.
+                                  </div>
+                                <div class="invalid-feedback" *ngIf="f.floor.errors?.minlength || f.floor.errors?.maxlength">
+                                    Enter valid Floor.
+                                  </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Door Number</label>
+                                <input type="text" class="form-control {{f.door_no.errors ? 'is-invalid' : 'is-valid'}}" formControlName="door_no" [(ngModel)]="formdetails.door_no">
+                                <div *ngIf=" f.door_no.errors" class="invalid-feedback">
+                                    <div *ngIf="f.door_no.errors.required">Please Enter .</div>
+                                </div>
+                                <div class="invalid-feedback" *ngIf="f.door_no.errors?.pattern">
+                                    Door Number should be numeric.
+                                  </div>
+                                  <div class="invalid-feedback" *ngIf="f.door_no.errors?.minlength || f.door_no.errors?.maxlength">
+                                    Enter valid Door Number.
+                                  </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">P.O Box Number</label>
+                                <input type="text" class="form-control {{f.po_box_no.errors ? 'is-invalid' : 'is-valid'}}" formControlName="po_box_no" [(ngModel)]="formdetails.po_box_no">
+                                <div *ngIf=" f.po_box_no.errors" class="invalid-feedback">
+                                    <div *ngIf="f.po_box_no.errors.required">Please Enter .</div>
+                                </div>
+                                <div class="invalid-feedback" *ngIf="f.po_box_no.errors?.pattern">
+                                    P.O Box Number should be numeric.
+                                  </div>
+                                  <div class="invalid-feedback" *ngIf="f.po_box_no.errors?.minlength || f.po_box_no.errors?.maxlength">
+                                    Enter valid P.O Box Number.
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="text-primary mt-4">Additional Comapny Details</h5>
+                    <div class="step-form mt-2">
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">How would you like to share Company Profile?</label>
+                                <div class="form-check-inline">
+                                    
+                                <input class="form-check-input ml-3" type="checkbox" formControlName="comp_profile" [(ngModel)]="formdetails.comp_profile">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Office Landline Number</label>
+                                <input type="tel" class="form-control" formControlName="office_land" [(ngModel)]="formdetails.office_land">
+                                <!-- <div *ngIf=" f.office_land.errors" class="invalid-feedback">
+                                    <div *ngIf="f.office_land.errors.required">Please Enter .</div>
+                                </div> -->
+                                <div class="invalid-feedback" *ngIf="f.office_land.errors?.pattern">
+                                    Office Landline Number should be numeric.
+                                  </div>
+                                  <div class="invalid-feedback" *ngIf="f.office_land.errors?.minlength || f.office_land.errors?.maxlength">
+                                    Enter valid Office Landline Number.
+                                  </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Company Email Adress</label>
+                                <input type="email" class="form-control {{f.comp_email.errors ? 'is-invalid' : 'is-valid'}}" formControlName="comp_email" [(ngModel)]="formdetails.comp_email">
+                                <!-- <div *ngIf=" f.comp_email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.comp_email.errors.required">Please Enter .</div>
+                                </div> -->
+                                <div class="invalid-feedback" *ngIf="f.comp_email.errors?.pattern">
+                                    Enter Valid Email.
+                                  </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Website</label>
+                                <input type="url" class="form-control {{f.website.errors ? 'is-invalid' : 'is-valid'}}" formControlName="website" [(ngModel)]="formdetails.website">
+                                <div class="invalid-feedback" *ngIf="f.website.errors?.pattern">
+                                    Enter Valid Website.
+                                  </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Company's Linkedin Page</label>
+                                <input type="url" class="form-control {{f.linkdin_page.errors ? 'is-invalid' : 'is-valid'}}" formControlName="linkdin_page" [(ngModel)]="formdetails.linkdin_page">
+                                <div class="invalid-feedback" *ngIf="f.linkdin_page.errors?.pattern">
+                                    Enter Valid Company's Linkedin Page.
+                                  </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Company's Twitter Page</label>
+                                <input type="url" class="form-control {{f.twitter_page.errors ? 'is-invalid' : 'is-valid'}}" formControlName="twitter_page" [(ngModel)]="formdetails.twitter_page">
+                                <div class="invalid-feedback" *ngIf="f.twitter_page.errors?.pattern">
+                                    Enter Valid Company's Twitter Page.
+                                  </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Company's Facebook Page</label>
+                                <input type="url" class="form-control {{f.facebook_page.errors ? 'is-invalid' : 'is-valid'}}" formControlName="facebook_page" [(ngModel)]="formdetails.facebook_page">
+                                <div class="invalid-feedback" *ngIf="f.facebook_page.errors?.pattern">
+                                    Enter Valid Company's Facebook Page.
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <a [routerLink]="'/user/step1'" class="btn btn-outline-warning mt-4">Back</a>
+                        </div>
+                        <div class="col-6 text-end">
+                            <button type="submit" [disabled]="!modelform.valid" class="btn btn-warning mt-4">Continue</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

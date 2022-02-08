@@ -1,0 +1,36 @@
+.relative {
+    position: relative;
+}
+.hint-list {
+    position: absolute;
+    top: 80px;
+    left: 10px;
+    background: #3f51b5;
+    padding: 10px;
+    border-radius: 6px;
+    z-index: 100;
+}
+.hint-list.success {
+    background: #22e210;
+}
+.hint-list.success li {
+    text-decoration: line-through;
+}
+.hint-list.success:after {
+    border-bottom: 10px solid #22e210;
+}
+.hint-list li {
+    color: #fff;
+    font-size: 13px;
+}
+.hint-list:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #3f51b5;
+    position: absolute;
+    top: -6px;
+    left: 10px;
+}
